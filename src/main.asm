@@ -1,3 +1,5 @@
+%include "include/exit_functions.asm"
+
 ;*+---------------------------------------------------------------------------+
 ;*| The .data section is used to store initialized data in a program.         |
 ;*| This data is usually defined by the programmer and does not change        |
@@ -36,12 +38,10 @@ section .text
 ;*| when the program starts.                          |
 ;*|---------------------------------------------------+
 _start:
-    mov rax, 1      ; set sys_write system call
-    mov rdi, 1      ; set stdout file descriptor
-    mov rsi, msg    ; set buffer to msg
-    mov rdx, 12     ; set msg length to 12
-    syscall         ; write msg to stdout
+    mov rax, 1          ; set sys_write system call
+    mov rdi, 1          ; set stdout file descriptor
+    mov rsi, msg        ; set buffer to msg
+    mov rdx, 12         ; set msg length to 12
+    syscall             ; write msg to stdout
 
-    mov rax, 60     ; set sys_exit system call 
-    mov rdi, 0      ; set exit success code to 0
-    syscall         ; terminate the program
+    call exit_success   ; terminate the program
