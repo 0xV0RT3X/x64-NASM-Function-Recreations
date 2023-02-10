@@ -26,4 +26,15 @@ string_size:
 
     ret                 ; return to the caller
 
+;+-----------------------------------------------------------------------------------------------------------+
+;| Description:          This function calculates the length of a null-terminated string passed in RDI.      |
+;| Input:                The address of a null-terminated string in RDI.                                     |
+;| Output:               The length of the string in RAX.                                                    |
+;+-----------------------------------------------------------------------------------------------------------+
+string_length:
+    call string_size    ; calculate the size of the string
+    dec rax             ; decrement rax (Size of the string with null terminator) by 1
+
+    ret                 ; return to the caller
+
 %endif
