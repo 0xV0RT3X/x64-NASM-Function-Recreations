@@ -82,4 +82,15 @@ printlf:
 
     ret                ; return to the caller
 
+;+--------------------------------------------------------------------------------+
+;| Description: This function prints a linefeed character to stdout.              |
+;| Input:       The string in the RDI register.                                   |
+;| Output:      None                                                              |
+;+--------------------------------------------------------------------------------+
+string_printlf:
+    call string_print  ; print the string to stdout
+    call printlf       ; print a linefeed character to stdout
+
+    ret                ; return to the caller
+
 %endif
