@@ -39,8 +39,8 @@ string_length:
 
 ;+--------------------------------------------------------------------------------+
 ;| Description: This function prints a null-terminated string passed in RDI.      |
-;| Input: The address of a null-terminated string in RDI.                         |
-;| Output: None                                                                   |
+;| Input:       The address of a null-terminated string in RDI.                   |
+;| Output:      None                                                              |
 ;+--------------------------------------------------------------------------------+
 string_print:
     push rdi            ; save the value of rdi on the stack
@@ -52,7 +52,7 @@ string_print:
     mov rdx, rax        ; store the length of the string in rdx
 
     mov rax, 1          ; set sys_write system call
-    mov rsi, rdi        ; set the address of the string to rsi
+    mov rsi, rdi        ; set the address of the string to rsif
     mov rdi, 1          ; set the file descriptor to stdout
     syscall             ; make the syscall
 
@@ -61,5 +61,25 @@ string_print:
     pop rdi             ; restore the value of rdi
 
     ret                 ; return to the caller
+
+;+--------------------------------------------------------------------------------+
+;| Description: This function prints a linefeed character to stdout.              |
+;| Input:       None                                                              |
+;| Output:      None                                                              |
+;+--------------------------------------------------------------------------------+
+printlf:
+    push rax           ; push rax onto the stack to preserve it while we use the eax register in this function
+
+    mov rax, 0xA       ; move 0xA into eax - 0xA is the ascii character for a linefeed
+
+    push rax           ; push the linefeed onto the stack so we can get the address
+
+    mov rdi, rsp       ; move the address of the current stack pointer into rax for string_print
+    call string_print  ; print linefeed
+
+    pop rax            ; remove linefeed character from the stack
+    pop rax            ; restore the original value of rax before the function was called
+
+    ret                ; return to the caller
 
 %endif
