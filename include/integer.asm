@@ -61,4 +61,23 @@ int_print:
 
     ret                 ; return to the caller
 
+; int_printlf function
+;
+; Description:
+;   This function takes an integer value passed in RDI, converts it to its string
+;   representation, and prints it to the standard output followed by a newline character.
+;
+; Input:
+;   RDI: Integer value to be printed.
+;
+; Output:
+;   The string representation of the integer value, followed by a newline character, is
+;   printed to the standard output.
+;
+int_printlf:
+    call int_print   ; convert the integer to its string representation and print it
+    call printlf     ; print a newline character
+    
+    ret              ; return to the caller
+
 %endif
