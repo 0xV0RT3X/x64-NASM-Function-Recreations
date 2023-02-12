@@ -3,7 +3,6 @@
 
 %include "include/string.asm"
 
-
 ; int_print - function to print an integer value
 ;
 ; INPUT:
@@ -26,6 +25,14 @@ int_print:
 
     xor rsi, rsi        ; initialize the number of characters to 0
 
+    test rdi, rdi       ; test if rdi is zero
+    jge .positive       ; jump if positive or zero to the label .positive
+    mov rax, '-'        ; move negative sign into rax
+    push rax            ; push rax on the stack
+    inc rsi             ; count each byte to print - number of characters
+    neg rdi             ; negate rdi to handle negative values
+
+.positive:
     mov rax, rdi        ; move the address of string into rax
 
 .divide_loop:
