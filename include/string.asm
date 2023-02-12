@@ -33,7 +33,32 @@ string_size:
 ;+-----------------------------------------------------------------------------------------------------------+
 string_length:
     call string_size    ; calculate the size of the string
-    dec rax             ; decrement rax (Size of the string with null terminator) by 1
+    dec rax             ; decrement rax by 1
+
+    ret                 ; return to the caller
+
+;+--------------------------------------------------------------------------------+
+;| Description: This function prints a null-terminated string passed in RDI.      |
+;| Input: The address of a null-terminated string in RDI.                         |
+;| Output: None                                                                   |
+;+--------------------------------------------------------------------------------+
+string_print:
+    push rdi            ; save the value of rdi on the stack
+    push rsi            ; save the value of rsi on the stack
+    push rdx            ; save the value of rdx on the stack
+
+    call string_length  ; get the length of the string
+
+    mov rdx, rax        ; store the length of the string in rdx
+
+    mov rax, 1          ; set sys_write system call
+    mov rsi, rdi        ; set the address of the string to rsi
+    mov rdi, 1          ; set the file descriptor to stdout
+    syscall             ; make the syscall
+
+    pop rdx             ; restore the value of rdx
+    pop rsi             ; restore the value of rsi
+    pop rdi             ; restore the value of rdi
 
     ret                 ; return to the caller
 
