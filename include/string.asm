@@ -68,6 +68,7 @@ string_print:
 ;| Output:      None                                                              |
 ;+--------------------------------------------------------------------------------+
 printlf:
+    push rdi           ; push rdi onto the stack to preserve it while we use the rdi register in this function
     push rax           ; push rax onto the stack to preserve it while we use the rax register in this function
 
     mov rax, 0xA       ; move 0xA into rax - 0xA is the ascii character for a linefeed
@@ -79,6 +80,7 @@ printlf:
 
     pop rax            ; remove linefeed character from the stack
     pop rax            ; restore the original value of rax before the function was called
+    pop rdi            ; restore the original value of rdi before the function was called
 
     ret                ; return to the caller
 
