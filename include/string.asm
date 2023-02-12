@@ -68,9 +68,9 @@ string_print:
 ;| Output:      None                                                              |
 ;+--------------------------------------------------------------------------------+
 printlf:
-    push rax           ; push rax onto the stack to preserve it while we use the eax register in this function
+    push rax           ; push rax onto the stack to preserve it while we use the rax register in this function
 
-    mov rax, 0xA       ; move 0xA into eax - 0xA is the ascii character for a linefeed
+    mov rax, 0xA       ; move 0xA into rax - 0xA is the ascii character for a linefeed
 
     push rax           ; push the linefeed onto the stack so we can get the address
 
